@@ -1,0 +1,31 @@
+---
+- hosts: first, second
+  tasks:
+  - name: make direcotry
+    file:
+      path: "/home/ubuntu/.ssh"
+      state: directory
+  - name: create empty file
+    file:
+      path: "/home/ubuntu/.ssh/authorized_keys"
+      state: touch
+  - name: put pubkey
+    lineinfile:
+      path: "/home/<ubuntu>/.ssh/authorized_keys"
+      line: "AAAAB3NzaC1yc2EAAAADAQABAAABAQDmDobYqK6lh2XXayDlrd1pKnx75cJDMBb4
+I8JdPJq0i1drvG+647F/UNBFbw3kNbRWhYKS6/3IHSRH9Lepqf3g/c2VnK0JDfIL
+AHEnG71T1vLXZPpqEVz+OfLIl8LdWMcQnHL7vQjX4XDbj/E8gMbL85EVoVRLmuLe
+i/tu2Ll+I16cDVvGtQYF2r/va+mYOsYHNIHPi0KbLzZnG/HuZk9BKHS5+hrKS/m4
+jVkKC2xFasIyZXju5cXGjbla07A80u82e4Mtf9CCizUOe0Kw5rzPvgdIjM7/ubVN
+r1ivfMTwrFgBlpfQu8sQXwoxo2k9LQGrFoZ9s2EMqlE5meZ+0k6n
+"
+
+
+
+
+
+
+
+
+
+#Goal is to automate the ssh keys onto the newly added devices

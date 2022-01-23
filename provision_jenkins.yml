@@ -1,0 +1,29 @@
+---
+- name: first playbook
+  hosts: first
+  tasks:
+
+
+    - name: ensure the jenkins apt repository key is installed
+      apt_key: url=https://pkg.jenkins.io/debian-stable/jenkins.io.key state=present
+      become: yes
+
+    - name: ensure the repository is configured
+      apt_repository: repo='deb https://pkg.jenkins.io/debian-stable binary/' state=present
+      become: yes
+
+    - name: Install Jenkins
+      shell: | 
+        wget -q -O - https://pkg.jenkins.io/debian/jenkins.io.key | sudo apt-key add -
+        sudo sh -c 'echo deb https://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
+        sudo apt-get update -y
+        sudo apt-get install jenkins -y
+
+    - name: Run Jenkins
+      shell: /etc/init.d/jenkins start
+      become: yes
+
+
+
+    - name: ensure jenkins is running
+      service: name=jenkins state=started
